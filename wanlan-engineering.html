@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>萬藍工程行 - 您自動化空間的守護者</title>
+    <meta name="description" content="專為無人店面設計的電力與空調專家 | 深度合作 ONE 桌遊 | 精通 Z-Manager 系統">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1565C0 0%, #0d47a1 100%);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 1.05em;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(13, 71, 161, 0.9), rgba(21, 101, 192, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231565C0" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .hero-slogan {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+        
+        .hero-sub {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary {
+            background: #06C755;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #1565C0;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #1565C0;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 60px;
+        }
+        
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .about-card {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 5px solid #1565C0;
+            transition: transform 0.3s;
+        }
+        
+        .about-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .about-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #1565C0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .about-card p {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(21, 101, 192, 0.15);
+        }
+        
+        .service-icon {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #1565C0;
+        }
+        
+        .service-card ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .service-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+        
+        .service-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #06C755;
+            font-weight: bold;
+        }
+        
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .portfolio-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .portfolio-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .portfolio-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+        
+        .portfolio-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9em;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .before {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+        
+        .after {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+        
+        .portfolio-info {
+            padding: 25px;
+        }
+        
+        .portfolio-info h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #1565C0;
+        }
+        
+        .portfolio-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .tag {
+            background: #e3f2fd;
+            color: #1565C0;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        /* Guarantees */
+        .guarantees {
+            background: linear-gradient(135deg, #1565C0 0%, #0d47a1 100%);
+            color: white;
+            padding: 80px 20px;
+        }
+        
+        .guarantees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .guarantee-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+        }
+        
+        .guarantee-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .guarantee-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: #f8f9fa;
+            padding: 80px 20px;
+        }
+        
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 50px auto 0;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .contact-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #1565C0;
+        }
+        
+        .contact-card a {
+            color: #1565C0;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        /* Footer */
+        footer {
+            background: #263238;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        footer p {
+            margin: 10px 0;
+            opacity: 0.8;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            
+            .hero-slogan {
+                font-size: 1.2em;
+            }
+            
+            .hero-sub {
+                font-size: 1em;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .portfolio-images {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                ⚡ 萬藍工程行
+            </div>
+            <nav>
+                <a href="#about">關於我們</a>
+                <a href="#services">服務項目</a>
+                <a href="#portfolio">案例分享</a>
+                <a href="#contact">聯絡我們</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>⚡ 萬藍工程行</h1>
+        <div class="hero-slogan">
+            不僅是修繕，更是您自動化空間的守護者
+        </div>
+        <div class="hero-sub">
+            專為無人店面設計的電力與空調專家
+        </div>
+        <div class="cta-group">
+            <a href="#contact" class="btn btn-primary">💬 LINE 快速報修</a>
+            <a href="#portfolio" class="btn btn-secondary">📸 查看案例</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <div class="container" id="about">
+        <h2 class="section-title">為什麼選擇萬藍？</h2>
+        <p class="section-subtitle">深耕自動化店面系統，我們懂的不只是電工</p>
+        
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>🎮 深度合作經驗</h3>
+                <p>
+                    與連鎖自助桌遊品牌「ONE 桌遊」長期合作，處理過數十個包廂的複雜配線與聯動控制。
+                    <br><br>
+                    我們了解自動化店面的每一個細節，從門禁、燈光到空調，都能精準配置。
+                </p>
+            </div>
+            
+            <div class="about-card">
+                <h3>⚙️ 系統化維護</h3>
+                <p>
+                    精通 <strong>Z-Manager 系統</strong>，能精準對接遠端電控需求。
+                    <br><br>
+                    這是傳統師傅做不到的「跨界專業」—— 我們不只會拉線，更懂系統邏輯。
+                </p>
+            </div>
+            
+            <div class="about-card">
+                <h3>📱 透明化施工</h3>
+                <p>
+                    透過 LINE 自動同步施工進度，讓業主就算不在場也 100% 放心。
+                    <br><br>
+                    每個步驟都有照片記錄，所有零件更換都清楚標註。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services -->
+    <div class="container" id="services" style="background: #f8f9fa; padding: 80px 20px; border-radius: 20px;">
+        <h2 class="section-title">專業服務項目</h2>
+        <p class="section-subtitle">針對無人店面與自動化空間的完整解決方案</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🔌</div>
+                <h3>自動化店面配線專修</h3>
+                <p style="color: #666; margin-bottom: 15px;">
+                    24 小時營運店面的用電安全專家
+                </p>
+                <ul>
+                    <li>遠端門禁配線規劃</li>
+                    <li>燈光自動控制系統</li>
+                    <li>電位分路優化設計</li>
+                    <li>預防跳電安全檢查</li>
+                    <li>配電盤熱顯像檢測</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">❄️</div>
+                <h3>智慧空調規劃提供</h3>
+                <p style="color: #666; margin-bottom: 15px;">
+                    包廂式獨立空調的最佳配置
+                </p>
+                <ul>
+                    <li>商用變頻冷氣節能安裝</li>
+                    <li>包廂獨立空調配置</li>
+                    <li>冷房效率均衡調校</li>
+                    <li>遠端啟閉系統整合</li>
+                    <li>定期保養維護合約</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>店面/居家修繕</h3>
+                <p style="color: #666; margin-bottom: 15px;">
+                    從小修繕到大工程都放心
+                </p>
+                <ul>
+                    <li>老舊線路安全巡檢</li>
+                    <li>節能燈具更換升級</li>
+                    <li>漏水精準抓漏處理</li>
+                    <li>衛浴設備升級安裝</li>
+                    <li>緊急故障快速排除</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3>定期維護專案</h3>
+                <p style="color: #666; margin-bottom: 15px;">
+                    預防停業風險的最佳選擇
+                </p>
+                <ul>
+                    <li>冷氣濾網清洗保養</li>
+                    <li>配電盤熱顯像檢查</li>
+                    <li>自動化設備健檢</li>
+                    <li>季節性預防保養</li>
+                    <li>24 小時緊急支援</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio -->
+    <div class="container" id="portfolio">
+        <h2 class="section-title">精選案例分享</h2>
+        <p class="section-subtitle">施工品質，照片會說話</p>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-images">
+                    <div class="portfolio-image before">
+                        <div>
+                            <strong>施工前</strong><br>
+                            雜亂線路<br>
+                            無標註、無保護
+                        </div>
+                    </div>
+                    <div class="portfolio-image after">
+                        <div>
+                            <strong>施工後</strong><br>
+                            整齊配線<br>
+                            標註清楚、耐火管保護
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>ONE 桌遊蘆洲店 - 配電盤改造</h3>
+                    <p>
+                        原有配線混亂，經常跳電影響營運。
+                        重新規劃電位分配，並整合 Z-Manager 遠端控制。
+                    </p>
+                    <div class="portfolio-tags">
+                        <span class="tag">配電優化</span>
+                        <span class="tag">Z-Manager</span>
+                        <span class="tag">無人店面</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <div class="portfolio-images">
+                    <div class="portfolio-image before">
+                        <div>
+                            <strong>施工前</strong><br>
+                            老舊分離式冷氣<br>
+                            耗電且冷房不均
+                        </div>
+                    </div>
+                    <div class="portfolio-image after">
+                        <div>
+                            <strong>施工後</strong><br>
+                            變頻冷氣<br>
+                            省電 40%、靜音舒適
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>ONE 桌遊板橋店 - 空調系統升級</h3>
+                    <p>
+                        8 個包廂獨立空調配置，搭配自動化控制系統，
+                        客人離場自動關機，大幅降低電費。
+                    </p>
+                    <div class="portfolio-tags">
+                        <span class="tag">智慧空調</span>
+                        <span class="tag">節能改造</span>
+                        <span class="tag">包廂配置</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <div class="portfolio-images">
+                    <div class="portfolio-image before">
+                        <div>
+                            <strong>施工前</strong><br>
+                            門禁常故障<br>
+                            無法遠端開門
+                        </div>
+                    </div>
+                    <div class="portfolio-image after">
+                        <div>
+                            <strong>施工後</strong><br>
+                            智能門禁<br>
+                            遠端控制、穩定可靠
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>ONE 桌遊中和店 - 門禁系統整合</h3>
+                    <p>
+                        整合電子鎖與 Z-Manager 系統，
+                        業主可遠端開門、查看進出紀錄，無人店面管理更輕鬆。
+                    </p>
+                    <div class="portfolio-tags">
+                        <span class="tag">智能門禁</span>
+                        <span class="tag">遠端控制</span>
+                        <span class="tag">系統整合</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guarantees -->
+    <section class="guarantees">
+        <h2 style="text-align: center; font-size: 2.5em; margin-bottom: 20px;">五大保證</h2>
+        <p style="text-align: center; font-size: 1.2em; opacity: 0.9; margin-bottom: 60px;">
+            用專業與服務，取代證照的信任
+        </p>
+        
+        <div class="guarantees-grid">
+            <div class="guarantee-card">
+                <div class="guarantee-icon">⚙️</div>
+                <h3>系統對接保證</h3>
+                <p>完美相容 Z-Manager 及各類遠端控制硬體</p>
+            </div>
+            
+            <div class="guarantee-card">
+                <div class="guarantee-icon">📱</div>
+                <h3>即時回報保證</h3>
+                <p>利用 LINE Bot 隨時通報進度，照片存證</p>
+            </div>
+            
+            <div class="guarantee-card">
+                <div class="guarantee-icon">🚗</div>
+                <h3>區域深耕保證</h3>
+                <p>蘆洲及鄰近地區快速抵達，緊急報修不漏接</p>
+            </div>
+            
+            <div class="guarantee-card">
+                <div class="guarantee-icon">💰</div>
+                <h3>價格透明保證</h3>
+                <p>先報價後施工，所有零件更換均有照片記錄</p>
+            </div>
+            
+            <div class="guarantee-card">
+                <div class="guarantee-icon">☁️</div>
+                <h3>售後數位保證</h3>
+                <p>所有修繕紀錄雲端儲存，輸入電話即可查詢保固</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title" style="color: #1565C0;">立即聯絡我們</h2>
+            <p class="section-subtitle">
+                蘆洲及鄰近地區 24 小時緊急支援<br>
+                免費現場勘查 | 透明報價 | LINE 即時回報
+            </p>
+            
+            <div class="contact-methods">
+                <div class="contact-card">
+                    <div class="contact-icon">💬</div>
+                    <h3>LINE 快速報修</h3>
+                    <p style="margin: 15px 0; color: #666;">最快速的聯絡方式</p>
+                    <a href="https://line.me/ti/p/YOUR_LINE_ID">@wanlan-eng</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3>電話諮詢</h3>
+                    <p style="margin: 15px 0; color: #666;">服務時間 24/7</p>
+                    <a href="tel:0912345678">0912-345-678</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email 詢價</h3>
+                    <p style="margin: 15px 0; color: #666;">詳細需求說明</p>
+                    <a href="mailto:service@wanlan.com">service@wanlan.com</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+                <h3 style="color: #1565C0; margin-bottom: 15px;">📍 服務區域</h3>
+                <p style="font-size: 1.1em; color: #555;">
+                    蘆洲、三重、五股、新莊、泰山、林口、板橋<br>
+                    <span style="font-size: 0.9em; opacity: 0.8;">其他地區歡迎來電詢問</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p style="font-size: 1.2em; font-weight: bold;">⚡ 萬藍工程行</p>
+        <p>您自動化空間的守護者</p>
+        <p style="margin-top: 20px; opacity: 0.6; font-size: 0.9em;">
+            ※ 本站由「店家官網 + LINE 智能客服」服務建立
+        </p>
+        <p style="margin-top: 5px;">
+            <a href="index.html" style="color: #1E88E5; text-decoration: none;">← 查看建站服務</a>
+        </p>
+    </footer>
+
+    <script>
+        // 平滑滾動
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
