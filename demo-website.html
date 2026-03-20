@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>築夢空間設計 - 您的理想家園規劃師</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Demo Badge */
+        .demo-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #FF5722;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover {
+            opacity: 0.7;
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%232c3e50" width="1200" height="600"/><text x="50%" y="50%" fill="white" font-size="48" text-anchor="middle">精美裝潢照片</text></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #1565C0;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(21, 101, 192, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(21, 101, 192, 0.5);
+        }
+        
+        .btn.line {
+            background: #06C755;
+        }
+        
+        .btn.phone {
+            background: #FF5722;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            color: #2c3e50;
+        }
+        
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+        }
+        
+        .portfolio-info {
+            padding: 20px;
+            background: white;
+        }
+        
+        .portfolio-info h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .portfolio-info p {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .before-after div {
+            text-align: center;
+            font-size: 0.9em;
+            color: #999;
+        }
+        
+        /* Testimonials */
+        .testimonial {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #1565C0;
+        }
+        
+        .testimonial p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            background: #1565C0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+        }
+        
+        .testimonial-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .testimonial-project {
+            color: #999;
+            font-size: 0.9em;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #1565C0 0%, #1E88E5 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .contact-method {
+            background: white;
+            color: #1565C0;
+            padding: 30px;
+            border-radius: 10px;
+            min-width: 250px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .contact-method-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .contact-method h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .contact-method a {
+            color: #1565C0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2em;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Badge -->
+    <div class="demo-badge">
+        ✨ DEMO 範例網站
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">🏠 築夢空間設計</div>
+            <nav>
+                <a href="#services">服務項目</a>
+                <a href="#portfolio">案例展示</a>
+                <a href="#testimonials">客戶見證</a>
+                <a href="#contact">聯絡我們</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>打造您的夢想空間</h1>
+            <p>15年專業經驗 | 超過500個成功案例 | 客戶滿意度98%</p>
+            <div>
+                <a href="#contact" class="btn line">💬 LINE 免費諮詢</a>
+                <a href="tel:0912345678" class="btn phone">📞 立即來電</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <div class="container" id="services">
+        <h2 class="section-title">我們的服務</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏡</div>
+                <h3>住宅裝潢</h3>
+                <p>客製化設計，打造專屬您的溫馨家居</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <h3>商業空間</h3>
+                <p>提升品牌形象，創造獨特氛圍</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>局部翻新</h3>
+                <p>廚房、浴室、臥室局部改造</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio -->
+    <div class="container" id="portfolio">
+        <h2 class="section-title">精選案例</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3em;">🏠</div>
+                        <div>現代簡約風格</div>
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>台北信義區 - 王先生住宅</h3>
+                    <p>25坪空間改造，運用開放式設計與淺色系搭配，打造明亮舒適的居住環境</p>
+                    <div class="before-after">
+                        <div>施工期：30天</div>
+                        <div>預算：120萬</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3em;">☕</div>
+                        <div>咖啡廳空間設計</div>
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>新北板橋 - Café Dreams</h3>
+                    <p>工業風格咖啡廳，結合木質元素與金屬裝飾，創造溫馨又有個性的用餐環境</p>
+                    <div class="before-after">
+                        <div>施工期：45天</div>
+                        <div>預算：180萬</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3em;">🛋️</div>
+                        <div>北歐風格客廳</div>
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>台中南屯 - 李小姐住宅</h3>
+                    <p>老屋翻新，改善採光與動線，運用北歐風格打造溫馨實用的生活空間</p>
+                    <div class="before-after">
+                        <div>施工期：40天</div>
+                        <div>預算：150萬</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="container" id="testimonials" style="background: #f8f9fa; padding: 60px 20px; border-radius: 10px;">
+        <h2 class="section-title">客戶真實回饋</h2>
+        
+        <div class="testimonial">
+            <p>「從設計到完工都非常專業！設計師很有耐心，一直調整到我們滿意為止。施工品質也很好，工班很守時，環境整潔。完工後超出我們的期待！」</p>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">👨</div>
+                <div>
+                    <div class="testimonial-name">王先生</div>
+                    <div class="testimonial-project">台北信義區住宅 · 2024年3月完工</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="testimonial">
+            <p>「我們的咖啡廳在社群上爆紅！很多客人都說裝潢很美，拍照超好看。生意比預期好很多，真的很感謝築夢團隊！」</p>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">👩</div>
+                <div>
+                    <div class="testimonial-name">陳小姐</div>
+                    <div class="testimonial-project">Café Dreams 咖啡廳 · 2024年1月完工</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="testimonial">
+            <p>「老房子住了20年，一直想翻新但怕麻煩。築夢團隊很細心，幫我們規劃得很好，施工期間也很配合我們的時間。現在每天回家心情都很好！」</p>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">👵</div>
+                <div>
+                    <div class="testimonial-name">李小姐</div>
+                    <div class="testimonial-project">台中南屯住宅 · 2023年12月完工</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 style="color: white; margin-bottom: 20px;">立即聯絡我們</h2>
+            <p style="font-size: 1.2em;">免費到府丈量 | 免費設計提案 | 透明報價</p>
+            
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <div class="contact-method-icon">💬</div>
+                    <h3>LINE 官方帳號</h3>
+                    <p>24小時自動回覆</p>
+                    <a href="https://line.me/ti/p/example">@dreamspace</a>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-method-icon">📞</div>
+                    <h3>服務專線</h3>
+                    <p>週一至週六 9:00-18:00</p>
+                    <a href="tel:0912345678">0912-345-678</a>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-method-icon">📧</div>
+                    <h3>Email 諮詢</h3>
+                    <p>24小時內回覆</p>
+                    <a href="mailto:info@dreamspace.com">info@dreamspace.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 築夢空間設計 | 統編：12345678 | 室內裝修業登記證：北市室裝字第 123 號</p>
+        <p style="margin-top: 10px; opacity: 0.7; font-size: 0.9em;">
+            這是由「店家官網 + LINE 智能客服」服務建立的 DEMO 範例網站
+        </p>
+        <p style="margin-top: 5px;">
+            <a href="index.html" style="color: #1E88E5; text-decoration: none;">← 返回服務介紹</a>
+        </p>
+    </footer>
+
+    <script>
+        // 平滑滾動
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

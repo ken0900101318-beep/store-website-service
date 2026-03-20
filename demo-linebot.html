@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINE Bot 智能客服 - 互動展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .demo-container {
+            max-width: 400px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .chat-header {
+            background: #06C755;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+        
+        .chat-info h2 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        
+        .chat-info p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .chat-messages {
+            height: 500px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .message.bot {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .message.user {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            background: #06C755;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .message-bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.6;
+        }
+        
+        .message.bot .message-bubble {
+            background: white;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message.user .message-bubble {
+            background: #06C755;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .quick-reply {
+            background: white;
+            border: 2px solid #06C755;
+            color: #06C755;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+        
+        .quick-reply:hover {
+            background: #06C755;
+            color: white;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            gap: 5px;
+            padding: 15px;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #999;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .chat-controls {
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #ddd;
+            text-align: center;
+        }
+        
+        .restart-btn {
+            background: #1565C0;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .restart-btn:hover {
+            background: #0d47a1;
+            transform: translateY(-2px);
+        }
+        
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="demo-container">
+            <div class="chat-header">
+                <div class="chat-avatar">🤖</div>
+                <div class="chat-info">
+                    <h2>築夢空間設計</h2>
+                    <p>智能客服小幫手</p>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be added here dynamically -->
+            </div>
+            
+            <div class="chat-controls">
+                <button class="restart-btn" onclick="restartDemo()">🔄 重新開始</button>
+            </div>
+        </div>
+        
+        <a href="index.html" class="back-link">← 返回服務介紹</a>
+    </div>
+
+    <script>
+        const conversations = [
+            {
+                type: 'bot',
+                text: '您好！歡迎來到築夢空間設計 👋\n\n我是您的專屬客服小幫手，很高興為您服務！',
+                delay: 500
+            },
+            {
+                type: 'bot',
+                text: '請問您想了解什麼呢？',
+                quickReplies: ['裝潢報價', '預約丈量', '查看案例', '營業時間'],
+                delay: 1000
+            },
+            {
+                type: 'user-click',
+                text: '裝潢報價',
+                delay: 1500
+            },
+            {
+                type: 'bot',
+                text: '好的！請問您想裝潢的空間是？',
+                quickReplies: ['住宅', '辦公室', '店面'],
+                delay: 1000
+            },
+            {
+                type: 'user-click',
+                text: '住宅',
+                delay: 1500
+            },
+            {
+                type: 'bot',
+                text: '了解！請問您的房屋坪數約多少呢？',
+                quickReplies: ['10-20坪', '20-30坪', '30-40坪', '40坪以上'],
+                delay: 1000
+            },
+            {
+                type: 'user-click',
+                text: '20-30坪',
+                delay: 1500
+            },
+            {
+                type: 'typing',
+                delay: 2000
+            },
+            {
+                type: 'bot',
+                text: '📊 根據您的需求，初步報價區間：\n\n💰 基礎裝潢：80-120萬\n💰 標準裝潢：120-180萬\n💰 豪華裝潢：180-300萬\n\n※ 實際價格需經現場丈量後確認',
+                delay: 500
+            },
+            {
+                type: 'bot',
+                text: '✨ 我們的服務包含：\n\n✅ 免費到府丈量\n✅ 免費 3D 設計圖\n✅ 透明報價清單\n✅ 完工保固 2 年\n\n需要預約丈量嗎？',
+                quickReplies: ['立即預約', '我再考慮', '看看案例'],
+                delay: 1000
+            },
+            {
+                type: 'user-click',
+                text: '立即預約',
+                delay: 1500
+            },
+            {
+                type: 'bot',
+                text: '太好了！請問您方便的時段是？',
+                quickReplies: ['平日上午', '平日下午', '假日'],
+                delay: 1000
+            },
+            {
+                type: 'user-click',
+                text: '假日',
+                delay: 1500
+            },
+            {
+                type: 'bot',
+                text: '好的！假日時段已收到 ✅\n\n請留下您的聯絡資訊，我們的專員會在 1 小時內與您確認時間：\n\n📞 請撥打：0912-345-678\n📧 或 Email：info@dreamspace.com\n\n或者直接回覆您的電話號碼，我們會儘快聯繫您！',
+                delay: 1000
+            },
+            {
+                type: 'bot',
+                text: '💡 小提示：\n現在預約還享有「首次丈量免費升級 3D 實境圖」優惠喔！',
+                delay: 2000
+            }
+        ];
+        
+        let currentIndex = 0;
+        const chatMessages = document.getElementById('chatMessages');
+        
+        function addMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${message.type === 'user-click' ? 'user' : message.type}`;
+            
+            if (message.type === 'typing') {
+                messageDiv.innerHTML = `
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-bubble">
+                        <div class="typing-indicator">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                `;
+                chatMessages.appendChild(messageDiv);
+                
+                setTimeout(() => {
+                    messageDiv.remove();
+                    showNextMessage();
+                }, message.delay || 1500);
+                return;
+            }
+            
+            if (message.type === 'bot') {
+                messageDiv.innerHTML = `
+                    <div class="message-avatar">🤖</div>
+                    <div>
+                        <div class="message-bubble">${message.text.replace(/\n/g, '<br>')}</div>
+                        ${message.quickReplies ? `
+                            <div class="quick-replies">
+                                ${message.quickReplies.map(reply => 
+                                    `<div class="quick-reply" onclick="selectQuickReply('${reply}')">${reply}</div>`
+                                ).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            } else if (message.type === 'user-click') {
+                messageDiv.innerHTML = `
+                    <div class="message-bubble">${message.text}</div>
+                `;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function showNextMessage() {
+            if (currentIndex >= conversations.length) return;
+            
+            const message = conversations[currentIndex];
+            currentIndex++;
+            
+            setTimeout(() => {
+                addMessage(message);
+                
+                if (message.type !== 'user-click' && currentIndex < conversations.length) {
+                    showNextMessage();
+                }
+            }, message.delay || 1000);
+        }
+        
+        function selectQuickReply(text) {
+            // 找到下一個 user-click 訊息並繼續
+            if (currentIndex < conversations.length && conversations[currentIndex].type === 'user-click') {
+                showNextMessage();
+            }
+        }
+        
+        function restartDemo() {
+            currentIndex = 0;
+            chatMessages.innerHTML = '';
+            showNextMessage();
+        }
+        
+        // 開始展示
+        showNextMessage();
+    </script>
+</body>
+</html>
