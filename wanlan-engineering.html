@@ -381,6 +381,184 @@
             margin-top: 5px;
         }
         
+        /* Process Flow */
+        .process-section {
+            background: white;
+            padding: 80px 20px;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .process-step {
+            text-align: center;
+            padding: 30px 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            position: relative;
+            transition: transform 0.3s;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .process-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1565C0, #0d47a1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 15px rgba(21, 101, 192, 0.3);
+        }
+        
+        .process-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 10px;
+        }
+        
+        .process-desc {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        /* FAQ */
+        .faq-section {
+            background: #f8f9fa;
+            padding: 80px 20px;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 1.1em;
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+        
+        .faq-icon {
+            font-size: 1.3em;
+            transition: transform 0.3s;
+        }
+        
+        .faq-answer {
+            padding: 0 25px 25px;
+            color: #555;
+            line-height: 1.8;
+            display: none;
+        }
+        
+        .faq-answer.active {
+            display: block;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* LINE Bot CTA */
+        .linebot-cta {
+            background: linear-gradient(135deg, #06C755 0%, #00B900 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .linebot-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .linebot-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .linebot-subtitle {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .linebot-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .linebot-feature {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .linebot-feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .linebot-feature-text {
+            font-size: 1.05em;
+        }
+        
+        .linebot-btn {
+            display: inline-block;
+            background: white;
+            color: #06C755;
+            padding: 20px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .linebot-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
         /* Guarantees */
         .guarantees {
             background: linear-gradient(135deg, #1565C0 0%, #0d47a1 100%);
@@ -814,6 +992,228 @@
         </div>
     </section>
 
+    <!-- Process Flow -->
+    <section class="process-section">
+        <div class="container">
+            <h2 class="section-title">服務流程</h2>
+            <p class="section-subtitle">簡單 5 步驟，快速解決您的問題</p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-number">1</div>
+                    <div class="process-title">LINE 報修</div>
+                    <div class="process-desc">
+                        加入官方 LINE，傳送照片或描述問題，我們立即回應
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-number">2</div>
+                    <div class="process-title">評估報價</div>
+                    <div class="process-desc">
+                        專業評估問題，提供透明報價，無隱藏費用
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-number">3</div>
+                    <div class="process-title">預約時間</div>
+                    <div class="process-desc">
+                        選擇方便的時段，北部當日到府，中南部預約排程
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-number">4</div>
+                    <div class="process-title">現場施工</div>
+                    <div class="process-desc">
+                        專業施工，全程 LINE 照片回報，讓您安心放心
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-number">5</div>
+                    <div class="process-title">驗收完工</div>
+                    <div class="process-desc">
+                        確認完工品質，提供保固憑證，售後服務有保障
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title" style="color: #1565C0;">常見問題</h2>
+            <p class="section-subtitle">客戶最關心的問題，一次解答</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Q: 沒有證照可以施工嗎？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        我們專注於<strong>無人店面系統整合</strong>，擁有豐富的 ONE 桌遊合作經驗（50+ 店家、200+ 包廂）。
+                        我們的優勢在於深度了解 Z-Manager 自動化系統、遠端控制邏輯，以及 24 小時營運店面的特殊需求。
+                        <br><br>
+                        我們提供<strong>五大保證</strong>（系統對接、即時回報、快速到府、價格透明、售後數位），
+                        用專業與服務建立信任，而非單純依賴證照。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Q: 報價包含哪些項目？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        我們的報價<strong>完全透明</strong>，包含：
+                        <br>✅ 材料費（電線、配件、設備等）
+                        <br>✅ 工資（專業施工人員）
+                        <br>✅ 運輸費（北部免收）
+                        <br>✅ 保固服務（依項目提供 3-12 個月）
+                        <br><br>
+                        所有零件更換都有<strong>照片記錄</strong>，絕無隱藏費用。
+                        施工前會詳細說明每個項目的價格，您同意後才開始施工。
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Q: 緊急報修多久可以到場？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <strong>北部地區（雙北、桃園、新竹）：</strong>
+                        <br>• 緊急報修：平均 2 小時內到場
+                        <br>• 一般報修：當日或次日預約
+                        <br><br>
+                        <strong>中南部地區：</strong>
+                        <br>• 提前預約排程，配合您方便的時間
+                        <br>• 緊急案件可協調加急處理
+                        <br><br>
+                        24 小時 LINE 客服隨時待命！
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Q: 如何保證施工品質？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        我們提供<strong>三重保障</strong>：
+                        <br><br>
+                        <strong>1. 施工透明化</strong>
+                        <br>• 全程 LINE 照片回報
+                        <br>• 每個步驟都有記錄
+                        <br>• 配線整齊標註編號
+                        <br><br>
+                        <strong>2. 材料有保障</strong>
+                        <br>• 使用符合規範的材料
+                        <br>• 耐火管、接地保護齊全
+                        <br>• 零件更換前告知品牌型號
+                        <br><br>
+                        <strong>3. 售後有保固</strong>
+                        <br>• 所有施工項目提供保固
+                        <br>• 雲端查詢保固紀錄
+                        <br>• 保固期內免費維修
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Q: 無人店面最常遇到的電力問題是什麼？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        根據我們服務 50+ 無人店面的經驗，最常見的問題是：
+                        <br><br>
+                        <strong>1. 頻繁跳電（40%）</strong>
+                        <br>• 原因：電位分配不當、負載過重
+                        <br>• 解決：重新規劃分路、升級無熔絲開關
+                        <br><br>
+                        <strong>2. 冷氣耗電過高（30%）</strong>
+                        <br>• 原因：設備老舊、包廂冷房不均
+                        <br>• 解決：安裝變頻冷氣、優化配置
+                        <br><br>
+                        <strong>3. 遠端控制不穩（20%）</strong>
+                        <br>• 原因：配線干擾、系統不相容
+                        <br>• 解決：隔離配線、整合 Z-Manager
+                        <br><br>
+                        <strong>4. 安全隱患（10%）</strong>
+                        <br>• 原因：線路老化、無接地保護
+                        <br>• 解決：全面巡檢、熱顯像檢測
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Q: 如何預防包廂冷氣漏水毀掉設備？</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <strong>預防措施：</strong>
+                        <br><br>
+                        <strong>1. 安裝前評估</strong>
+                        <br>• 確認排水坡度是否足夠
+                        <br>• 檢查排水管路徑合理性
+                        <br>• 避開桌遊設備正上方
+                        <br><br>
+                        <strong>2. 定期保養</strong>
+                        <br>• 每 3 個月清洗濾網
+                        <br>• 每半年檢查排水管
+                        <br>• 發現異音立即處理
+                        <br><br>
+                        <strong>3. 安裝漏水警報器</strong>
+                        <br>• 偵測到漏水立即通知
+                        <br>• 可整合 LINE 自動警報
+                        <br>• 避免損失擴大
+                        <br><br>
+                        我們的<strong>定期維護專案</strong>包含以上所有項目！
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LINE Bot CTA -->
+    <section class="linebot-cta">
+        <div class="linebot-content">
+            <div class="linebot-title">🤖 智能 LINE 客服</div>
+            <div class="linebot-subtitle">24 小時自動回應，快速解決您的問題</div>
+            
+            <div class="linebot-features">
+                <div class="linebot-feature">
+                    <div class="linebot-feature-icon">💬</div>
+                    <div class="linebot-feature-text">即時報修<br>隨時回應</div>
+                </div>
+                <div class="linebot-feature">
+                    <div class="linebot-feature-icon">❓</div>
+                    <div class="linebot-feature-text">常見問答<br>秒速回覆</div>
+                </div>
+                <div class="linebot-feature">
+                    <div class="linebot-feature-icon">📅</div>
+                    <div class="linebot-feature-text">預約時間<br>彈性安排</div>
+                </div>
+                <div class="linebot-feature">
+                    <div class="linebot-feature-icon">🔍</div>
+                    <div class="linebot-feature-text">保固查詢<br>一鍵搞定</div>
+                </div>
+            </div>
+            
+            <a href="https://line.me/ti/p/@one-eng" class="linebot-btn">
+                💬 加入 LINE 立即諮詢
+            </a>
+            
+            <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.9;">
+                掃描 QR Code 或搜尋 LINE ID: <strong>@one-eng</strong>
+            </p>
+        </div>
+    </section>
+
     <!-- Guarantees -->
     <section class="guarantees">
         <h2 style="text-align: center; font-size: 2.5em; margin-bottom: 20px;">五大保證</h2>
@@ -925,6 +1325,24 @@
                 }
             });
         });
+        
+        // FAQ 摺疊功能
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            
+            // 關閉其他打開的 FAQ
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').classList.remove('active');
+                }
+            });
+            
+            // 切換當前 FAQ
+            faqItem.classList.toggle('active');
+            answer.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
