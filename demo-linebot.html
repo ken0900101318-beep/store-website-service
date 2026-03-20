@@ -231,7 +231,11 @@
             </div>
             
             <div class="chat-controls">
-                <button class="restart-btn" onclick="restartDemo()">🔄 重新開始</button>
+                <div style="background: #fff3cd; padding: 10px; border-radius: 8px; margin-bottom: 10px; font-size: 0.9em; color: #856404;">
+                    ✨ <strong>自動展示模式</strong><br>
+                    Bot 會自動選擇最佳路徑演示給您看
+                </div>
+                <button class="restart-btn" onclick="restartDemo()">🔄 重新播放</button>
             </div>
         </div>
         
@@ -578,9 +582,24 @@
                 
                 if (!message.quickReplies && currentIndex < messages.length) {
                     showNextMessage();
+                } else if (message.quickReplies) {
+                    // 自動播放下一個選擇
+                    autoPlay();
                 }
             }, message.delay || 1000);
         }
+        
+        // 自動播放的選擇順序
+        const autoPlayChoices = [
+            '裝潢報價',
+            '住宅',
+            '20-30坪',
+            '現代簡約',
+            '80-150萬',
+            '立即預約',
+            '假日上午'
+        ];
+        let autoPlayIndex = 0;
         
         function selectQuickReply(text) {
             const messages = scenarios[currentScenario];
@@ -605,9 +624,27 @@
             }
         }
         
+        function autoPlay() {
+            const messages = scenarios[currentScenario];
+            if (currentIndex >= messages.length) return;
+            
+            const message = messages[currentIndex - 1];
+            
+            if (message && message.quickReplies && autoPlayIndex < autoPlayChoices.length) {
+                const choice = autoPlayChoices[autoPlayIndex];
+                if (message.quickReplies.includes(choice)) {
+                    autoPlayIndex++;
+                    setTimeout(() => {
+                        selectQuickReply(choice);
+                    }, 1500);
+                }
+            }
+        }
+        
         function restartDemo() {
             currentScenario = 'main';
             currentIndex = 0;
+            autoPlayIndex = 0;
             userChoices = {};
             chatMessages.innerHTML = '';
             showNextMessage();
