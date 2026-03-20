@@ -83,8 +83,38 @@
         
         .hero-sub {
             font-size: 1.2em;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             opacity: 0.9;
+        }
+        
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 1000px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+            color: white;
         }
         
         .cta-group {
@@ -295,6 +325,62 @@
             font-size: 0.9em;
         }
         
+        /* Real Photo */
+        .real-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background: #f8f9fa;
+            padding: 80px 20px;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        
+        .testimonial-stars {
+            color: #FFC107;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-text {
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 1.05em;
+        }
+        
+        .testimonial-role {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 5px;
+        }
+        
         /* Guarantees */
         .guarantees {
             background: linear-gradient(135deg, #1565C0 0%, #0d47a1 100%);
@@ -440,6 +526,26 @@
             <a href="#contact" class="btn btn-primary">💬 LINE 快速報修</a>
             <a href="#portfolio" class="btn btn-secondary">📸 查看案例</a>
         </div>
+        
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">服務店家</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">200+</div>
+                <div class="stat-label">包廂配線經驗</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">客戶滿意度</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2小時</div>
+                <div class="stat-label">緊急到場時間</div>
+            </div>
+        </div>
     </section>
 
     <!-- About -->
@@ -554,6 +660,23 @@
         
         <div class="portfolio-grid">
             <div class="portfolio-item">
+                <img src="images/one-boardgame-entrance.jpg" alt="ONE 桌遊店面入口" class="real-photo">
+                <div class="portfolio-info">
+                    <h3>ONE 桌遊 - 完整電力與門禁整合</h3>
+                    <p>
+                        從門禁系統、包廂燈光、到冷氣控制，全面整合 Z-Manager 遠端管理。
+                        實現 24 小時無人營運，業主可隨時遠端監控用電狀況。
+                    </p>
+                    <div class="portfolio-tags">
+                        <span class="tag">智能門禁</span>
+                        <span class="tag">Z-Manager</span>
+                        <span class="tag">無人店面</span>
+                        <span class="tag">全面整合</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
                 <div class="portfolio-images">
                     <div class="portfolio-image before">
                         <div>
@@ -647,6 +770,49 @@
             </div>
         </div>
     </div>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title" style="color: #1565C0;">客戶真實評價</h2>
+            <p class="section-subtitle">信任來自客戶的肯定</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="testimonial-text">
+                        「ONE工程行超專業！從配線到門禁整合，全部一手包辦。
+                        最重要的是他們真的懂 Z-Manager 系統，不像一般師傅只會拉線。
+                        現在我們店從此沒再跳電過，遠端控制也很穩定。」
+                    </div>
+                    <div class="testimonial-author">王老闆</div>
+                    <div class="testimonial-role">ONE 桌遊蘆洲店</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="testimonial-text">
+                        「冷氣安裝前師傅就告訴我怎麼配置最省電，
+                        現在 8 個包廂的冷氣都能遠端控制，客人離場自動關機。
+                        一個月電費省了快 40%，真的很值得！」
+                    </div>
+                    <div class="testimonial-author">陳店長</div>
+                    <div class="testimonial-role">ONE 桌遊板橋店</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="testimonial-text">
+                        「施工過程全程 LINE 回報，每個步驟都有照片。
+                        配線整齊到讓我驚艷，連電線都有標註編號。
+                        這種細心程度，真的是把我的店當自己家在處理。」
+                    </div>
+                    <div class="testimonial-author">林經理</div>
+                    <div class="testimonial-role">ONE 桌遊中和店</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Guarantees -->
     <section class="guarantees">
