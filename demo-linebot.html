@@ -239,94 +239,288 @@
     </div>
 
     <script>
-        const conversations = [
-            {
-                type: 'bot',
-                text: '您好！歡迎來到築夢空間設計 👋\n\n我是您的專屬客服小幫手，很高興為您服務！',
-                delay: 500
-            },
-            {
-                type: 'bot',
-                text: '請問您想了解什麼呢？',
-                quickReplies: ['裝潢報價', '預約丈量', '查看案例', '營業時間'],
-                delay: 1000
-            },
-            {
-                type: 'user-click',
-                text: '裝潢報價',
-                delay: 1500
-            },
-            {
-                type: 'bot',
-                text: '好的！請問您想裝潢的空間是？',
-                quickReplies: ['住宅', '辦公室', '店面'],
-                delay: 1000
-            },
-            {
-                type: 'user-click',
-                text: '住宅',
-                delay: 1500
-            },
-            {
-                type: 'bot',
-                text: '了解！請問您的房屋坪數約多少呢？',
-                quickReplies: ['10-20坪', '20-30坪', '30-40坪', '40坪以上'],
-                delay: 1000
-            },
-            {
-                type: 'user-click',
-                text: '20-30坪',
-                delay: 1500
-            },
-            {
-                type: 'typing',
-                delay: 2000
-            },
-            {
-                type: 'bot',
-                text: '📊 根據您的需求，初步報價區間：\n\n💰 基礎裝潢：80-120萬\n💰 標準裝潢：120-180萬\n💰 豪華裝潢：180-300萬\n\n※ 實際價格需經現場丈量後確認',
-                delay: 500
-            },
-            {
-                type: 'bot',
-                text: '✨ 我們的服務包含：\n\n✅ 免費到府丈量\n✅ 免費 3D 設計圖\n✅ 透明報價清單\n✅ 完工保固 2 年\n\n需要預約丈量嗎？',
-                quickReplies: ['立即預約', '我再考慮', '看看案例'],
-                delay: 1000
-            },
-            {
-                type: 'user-click',
-                text: '立即預約',
-                delay: 1500
-            },
-            {
-                type: 'bot',
-                text: '太好了！請問您方便的時段是？',
-                quickReplies: ['平日上午', '平日下午', '假日'],
-                delay: 1000
-            },
-            {
-                type: 'user-click',
-                text: '假日',
-                delay: 1500
-            },
-            {
-                type: 'bot',
-                text: '好的！假日時段已收到 ✅\n\n請留下您的聯絡資訊，我們的專員會在 1 小時內與您確認時間：\n\n📞 請撥打：0912-345-678\n📧 或 Email：info@dreamspace.com\n\n或者直接回覆您的電話號碼，我們會儘快聯繫您！',
-                delay: 1000
-            },
-            {
-                type: 'bot',
-                text: '💡 小提示：\n現在預約還享有「首次丈量免費升級 3D 實境圖」優惠喔！',
-                delay: 2000
-            }
-        ];
+        const scenarios = {
+            main: [
+                {
+                    type: 'bot',
+                    text: '您好！歡迎來到築夢空間設計 👋',
+                    delay: 500
+                },
+                {
+                    type: 'bot',
+                    text: '我是您的專屬智能客服小幫手，很高興為您服務！',
+                    delay: 1000
+                },
+                {
+                    type: 'bot',
+                    text: '請問您想了解什麼呢？',
+                    quickReplies: ['裝潢報價', '預約丈量', '查看案例', '營業時間'],
+                    delay: 1500,
+                    branches: {
+                        '裝潢報價': 'quote',
+                        '預約丈量': 'appointment',
+                        '查看案例': 'portfolio',
+                        '營業時間': 'hours'
+                    }
+                }
+            ],
+            
+            quote: [
+                {
+                    type: 'typing',
+                    delay: 1000
+                },
+                {
+                    type: 'bot',
+                    text: '好的！我來幫您評估報價 💰\n\n請問您想裝潢的空間是？',
+                    quickReplies: ['住宅', '辦公室', '店面', '其他'],
+                    delay: 500,
+                    branches: {
+                        '住宅': 'quote_home',
+                        '辦公室': 'quote_office',
+                        '店面': 'quote_shop'
+                    }
+                }
+            ],
+            
+            quote_home: [
+                {
+                    type: 'typing',
+                    delay: 800
+                },
+                {
+                    type: 'bot',
+                    text: '了解！住宅裝潢是我們最擅長的 🏠\n\n請問您的房屋坪數約多少呢？',
+                    quickReplies: ['10-20坪', '20-30坪', '30-40坪', '40坪以上'],
+                    delay: 500,
+                    saveTo: 'size'
+                },
+                {
+                    type: 'typing',
+                    delay: 1500
+                },
+                {
+                    type: 'bot',
+                    text: '收到！再請問您偏好的裝潢風格是？\n\n（這會影響材料選擇和預算）',
+                    quickReplies: ['現代簡約', '北歐風', '工業風', '日式無印', '還沒想好'],
+                    delay: 500,
+                    saveTo: 'style'
+                },
+                {
+                    type: 'typing',
+                    delay: 2000
+                },
+                {
+                    type: 'bot',
+                    text: '好的！最後一個問題：\n\n您希望的預算範圍大約是？',
+                    quickReplies: ['80萬以下', '80-150萬', '150-300萬', '300萬以上'],
+                    delay: 500,
+                    saveTo: 'budget'
+                },
+                {
+                    type: 'typing',
+                    delay: 2500
+                },
+                {
+                    type: 'bot',
+                    text: '✨ 太好了！根據您的需求，我已經為您分析完成：\n\n📍 空間類型：住宅\n📏 坪數：{size}\n🎨 風格：{style}\n💰 預算：{budget}\n\n讓我為您整理詳細報價...',
+                    delay: 500
+                },
+                {
+                    type: 'typing',
+                    delay: 2000
+                },
+                {
+                    type: 'bot',
+                    text: '📊 智能報價分析結果：\n\n💰 建議預算：{quote_range}\n\n包含項目：\n✅ 拆除工程\n✅ 水電配置\n✅ 泥作工程\n✅ 木作施工\n✅ 油漆粉刷\n✅ 系統櫃製作\n✅ 燈具安裝\n\n※ 實際價格需經現場丈量後確認',
+                    delay: 500
+                },
+                {
+                    type: 'bot',
+                    text: '🎁 好消息！\n\n您的預算範圍符合我們本月優惠活動：\n\n✨ 免費升級 3D 實境圖\n✨ 贈送價值 2 萬元智能家電\n✨ 工期縮短 20%\n\n需要預約免費丈量嗎？',
+                    quickReplies: ['立即預約', '我再考慮', '想看案例'],
+                    delay: 1500,
+                    branches: {
+                        '立即預約': 'appointment',
+                        '想看案例': 'portfolio'
+                    }
+                }
+            ],
+            
+            quote_office: [
+                {
+                    type: 'typing',
+                    delay: 1000
+                },
+                {
+                    type: 'bot',
+                    text: '好的！辦公室空間設計 🏢\n\n請問預計容納多少人？',
+                    quickReplies: ['10人以下', '10-30人', '30-50人', '50人以上'],
+                    delay: 500
+                },
+                {
+                    type: 'typing',
+                    delay: 1500
+                },
+                {
+                    type: 'bot',
+                    text: '了解！辦公室空間我們會特別注重：\n\n✅ 動線規劃\n✅ 採光配置\n✅ 隔音效果\n✅ 網路配線\n\n預估報價：150-500萬\n（依實際坪數調整）\n\n需要專人詳細說明嗎？',
+                    quickReplies: ['立即聯絡', '查看案例'],
+                    delay: 1000
+                }
+            ],
+            
+            appointment: [
+                {
+                    type: 'typing',
+                    delay: 1000
+                },
+                {
+                    type: 'bot',
+                    text: '太好了！預約免費丈量 📐\n\n我們的設計師會到府：\n✅ 實地丈量\n✅ 了解您的需求\n✅ 提供初步建議\n✅ 當場報價\n\n全程完全免費！',
+                    delay: 500
+                },
+                {
+                    type: 'bot',
+                    text: '請問您方便的時段是？',
+                    quickReplies: ['平日上午', '平日下午', '假日上午', '假日下午'],
+                    delay: 1000,
+                    saveTo: 'time_slot'
+                },
+                {
+                    type: 'typing',
+                    delay: 1500
+                },
+                {
+                    type: 'bot',
+                    text: '好的！{time_slot} 已記錄 ✅\n\n請提供您的聯絡資訊，我們會在 30 分鐘內致電確認：\n\n請選擇聯絡方式：',
+                    quickReplies: ['提供電話', '加 LINE 好友', 'Email 聯絡'],
+                    delay: 500
+                },
+                {
+                    type: 'typing',
+                    delay: 1000
+                },
+                {
+                    type: 'bot',
+                    text: '📞 請回覆您的電話號碼\n或直接撥打：0912-345-678\n\n我們的專員會立即為您服務！',
+                    delay: 500
+                },
+                {
+                    type: 'bot',
+                    text: '💡 小提示：\n現在預約還享有「首次丈量免費升級 3D 實境圖」優惠喔！',
+                    delay: 2000
+                }
+            ],
+            
+            portfolio: [
+                {
+                    type: 'typing',
+                    delay: 1000
+                },
+                {
+                    type: 'bot',
+                    text: '好的！讓我為您介紹我們的精選案例 🏆',
+                    delay: 500
+                },
+                {
+                    type: 'bot',
+                    text: '我們累積超過 500 個成功案例！\n客戶滿意度高達 98% 😊\n\n您想看哪種類型的案例呢？',
+                    quickReplies: ['住宅案例', '商業空間', '小坪數改造', '老屋翻新'],
+                    delay: 1000
+                },
+                {
+                    type: 'typing',
+                    delay: 1500
+                },
+                {
+                    type: 'bot',
+                    text: '📸 這是我們近期完工的案例：\n\n🏠 台北信義區 - 王先生住宅\n📏 25坪 | 預算 120萬\n⏱️ 工期 30 天\n\n客戶評價：「超出期待！」⭐⭐⭐⭐⭐\n\n想看更多案例嗎？',
+                    quickReplies: ['查看官網案例', '立即預約', '我再想想'],
+                    delay: 500,
+                    branches: {
+                        '查看官網案例': 'view_website',
+                        '立即預約': 'appointment'
+                    }
+                }
+            ],
+            
+            hours: [
+                {
+                    type: 'typing',
+                    delay: 800
+                },
+                {
+                    type: 'bot',
+                    text: '📅 我們的營業時間：\n\n週一至週五：9:00 - 18:00\n週六：10:00 - 17:00\n週日：公休\n\n📞 24 小時 LINE 客服隨時為您服務！',
+                    delay: 500
+                },
+                {
+                    type: 'bot',
+                    text: '還有其他想了解的嗎？',
+                    quickReplies: ['裝潢報價', '預約丈量', '查看案例', '返回首頁'],
+                    delay: 1000,
+                    branches: {
+                        '裝潢報價': 'quote',
+                        '預約丈量': 'appointment',
+                        '查看案例': 'portfolio',
+                        '返回首頁': 'main'
+                    }
+                }
+            ],
+            
+            view_website: [
+                {
+                    type: 'bot',
+                    text: '好的！您可以到我們的官網查看完整案例：\n\n🌐 https://dreamspace.com/portfolio\n\n上面有詳細的施工前後對比照片！',
+                    delay: 500
+                },
+                {
+                    type: 'bot',
+                    text: '看完案例後，有興趣的話隨時預約丈量喔！',
+                    quickReplies: ['立即預約', '返回首頁'],
+                    delay: 1500,
+                    branches: {
+                        '立即預約': 'appointment',
+                        '返回首頁': 'main'
+                    }
+                }
+            ]
+        };
         
+        let currentScenario = 'main';
         let currentIndex = 0;
+        let userChoices = {};
         const chatMessages = document.getElementById('chatMessages');
         
-        function addMessage(message) {
+        function calculateQuote(size, style, budget) {
+            const ranges = {
+                '10-20坪': '80-120萬',
+                '20-30坪': '120-180萬',
+                '30-40坪': '180-250萬',
+                '40坪以上': '250-400萬'
+            };
+            return ranges[size] || '請洽詢專員';
+        }
+        
+        function replaceVariables(text) {
+            let result = text;
+            for (let key in userChoices) {
+                result = result.replace(`{${key}}`, userChoices[key]);
+            }
+            
+            // 計算報價範圍
+            if (result.includes('{quote_range}') && userChoices.size) {
+                const quote = calculateQuote(userChoices.size, userChoices.style, userChoices.budget);
+                result = result.replace('{quote_range}', quote);
+            }
+            
+            return result;
+        }
+        
+        function addMessage(message, isUser = false) {
             const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${message.type === 'user-click' ? 'user' : message.type}`;
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
             
             if (message.type === 'typing') {
                 messageDiv.innerHTML = `
@@ -348,11 +542,15 @@
                 return;
             }
             
-            if (message.type === 'bot') {
+            const text = replaceVariables(message.text);
+            
+            if (isUser) {
+                messageDiv.innerHTML = `<div class="message-bubble">${text}</div>`;
+            } else {
                 messageDiv.innerHTML = `
                     <div class="message-avatar">🤖</div>
                     <div>
-                        <div class="message-bubble">${message.text.replace(/\n/g, '<br>')}</div>
+                        <div class="message-bubble">${text.replace(/\n/g, '<br>')}</div>
                         ${message.quickReplies ? `
                             <div class="quick-replies">
                                 ${message.quickReplies.map(reply => 
@@ -362,10 +560,6 @@
                         ` : ''}
                     </div>
                 `;
-            } else if (message.type === 'user-click') {
-                messageDiv.innerHTML = `
-                    <div class="message-bubble">${message.text}</div>
-                `;
             }
             
             chatMessages.appendChild(messageDiv);
@@ -373,34 +567,53 @@
         }
         
         function showNextMessage() {
-            if (currentIndex >= conversations.length) return;
+            const messages = scenarios[currentScenario];
+            if (currentIndex >= messages.length) return;
             
-            const message = conversations[currentIndex];
+            const message = messages[currentIndex];
             currentIndex++;
             
             setTimeout(() => {
                 addMessage(message);
                 
-                if (message.type !== 'user-click' && currentIndex < conversations.length) {
+                if (!message.quickReplies && currentIndex < messages.length) {
                     showNextMessage();
                 }
             }, message.delay || 1000);
         }
         
         function selectQuickReply(text) {
-            // 找到下一個 user-click 訊息並繼續
-            if (currentIndex < conversations.length && conversations[currentIndex].type === 'user-click') {
+            const messages = scenarios[currentScenario];
+            const lastMessage = messages[currentIndex - 1];
+            
+            // Save user choice
+            if (lastMessage.saveTo) {
+                userChoices[lastMessage.saveTo] = text;
+            }
+            
+            // Add user message
+            addMessage({ text: text, type: 'user' }, true);
+            
+            // Branch to new scenario if specified
+            if (lastMessage.branches && lastMessage.branches[text]) {
+                currentScenario = lastMessage.branches[text];
+                currentIndex = 0;
+                setTimeout(() => showNextMessage(), 800);
+            } else {
+                // Continue current scenario
                 showNextMessage();
             }
         }
         
         function restartDemo() {
+            currentScenario = 'main';
             currentIndex = 0;
+            userChoices = {};
             chatMessages.innerHTML = '';
             showNextMessage();
         }
         
-        // 開始展示
+        // Start demo
         showNextMessage();
     </script>
 </body>
